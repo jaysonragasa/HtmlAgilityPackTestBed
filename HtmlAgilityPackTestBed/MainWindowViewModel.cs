@@ -150,13 +150,13 @@ namespace HtmlAgilityPackTestBed
         #endregion
 
         #region command methods
-        void Command_OpenUrl_Click(string url)
+        async void Command_OpenUrl_Click(string url)
         {
             if (!string.IsNullOrEmpty(this.Url) && !string.IsNullOrWhiteSpace(this.Url))
             {
                 if (this.Url.ToLowerInvariant().StartsWith("http"))
                 {
-                    LoadHtmlFromUrl();
+                    await LoadHtmlFromUrl();
                 }
                 else // something else
                 {
@@ -223,7 +223,7 @@ namespace HtmlAgilityPackTestBed
             this._htmlDoc.LoadHtml(this._htmlstring);
         }
 
-        async void LoadHtmlFromUrl()
+        async Task LoadHtmlFromUrl()
         {
             HtmlNode.ElementsFlags.Remove("form");
             this._htmlstring = await MonkeyWeb.Monkey.GetStringAsync(this.Url);

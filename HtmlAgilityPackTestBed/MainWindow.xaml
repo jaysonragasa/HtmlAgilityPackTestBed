@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:jio="clr-namespace:Jara.Xaml.Control.Extension;assembly=Jara.Xaml.ControlExtensions.NetStandard"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="650" Width="500"
         
         Background="#FF2D2D30" FontFamily="Segoe UI Light"
         >
@@ -15,14 +15,14 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    
+
     <Grid>
         <Grid jio:GridEx.RowDefinitions="~ ~ ~ * ~">
             <Grid Grid.Row="0" Margin="10">
                 <StackPanel Orientation="Horizontal">
                     <Grid>
                         <Ellipse Width="32" Height="32" Fill="#FF007ACC" />
-                        <TextBlock Text="&#xe99a;" FontFamily="Segoe MDL2 Assets" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBlock Text="&#xe99a;" FontFamily="Segoe MDL2 Assets" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2,0,0,0" />
                     </Grid>
                     <Button Content=" New " BorderThickness="0" Background="Transparent" Margin="5,0" Command="{Binding Command_New}" />
                 </StackPanel>
@@ -68,7 +68,7 @@
                 <TextBlock Text="{Binding FooterText}" Margin="10,5"/>
             </Grid>
         </Grid>
-        
+
         <!--#region ask url popup-->
         <Grid Background="#7f000000" Visibility="{Binding ShowOpenUrlWindow, Converter={StaticResource BooleanToVisibility}}">
             <Grid Background="#FF007ACC" VerticalAlignment="Center">
