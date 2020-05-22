@@ -16,7 +16,7 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
 
-    <Grid>
+    <Grid IsEnabled="{Binding EnableFullControl}">
         <Grid jio:GridEx.RowDefinitions="~ ~ ~ * ~">
             <Grid Grid.Row="0" Margin="10">
                 <StackPanel Orientation="Horizontal">
@@ -50,7 +50,11 @@
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="50,0,0,0">
                     <TextBlock Text="Result" Margin="0,0,0,5" FontFamily="Segoe UI Semibold" />
-                    <RadioButton Content="Text" GroupName="Result" IsChecked="{Binding ResultText}" />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Content="Text" GroupName="Result" IsChecked="{Binding ResultText}" />
+
+                        <CheckBox Content="Trim" Margin="25,0,0,0" IsChecked="{Binding ResultTextTrim}" />
+                    </StackPanel>
                     <!--IsChecked="{Binding ResultHTML}"-->
                     <RadioButton Content="HTML" GroupName="Result" />
                 </StackPanel>

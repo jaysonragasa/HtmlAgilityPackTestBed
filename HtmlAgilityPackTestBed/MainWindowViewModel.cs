@@ -134,6 +134,29 @@ namespace HtmlAgilityPackTestBed
                 NotifyUI();
             }
         }
+
+        private bool _EnableFullControl = true;
+        public bool EnableFullControl
+        {
+            get { return _EnableFullControl; }
+            set
+            {
+                _EnableFullControl = value;
+                NotifyUI();
+            }
+        }
+
+        private bool _ResultTextTrim = false;
+        public bool ResultTextTrim
+        {
+            get { return _ResultTextTrim; }
+            set
+            {
+                _ResultTextTrim = value;
+                NotifyUI();
+                GetXPathResult();
+            }
+        }
         #endregion
 
         #region commands
@@ -201,6 +224,7 @@ namespace HtmlAgilityPackTestBed
 
         void New()
         {
+            this.FooterText = "Idle ..";
             this.XPath = string.Empty;
             this.XPathResult = string.Empty;
             this.Url = string.Empty;
@@ -218,16 +242,24 @@ namespace HtmlAgilityPackTestBed
 
         void LoadHtmlString()
         {
+            this.EnableFullControl = false;
+
             HtmlNode.ElementsFlags.Remove("form");
             this._htmlstring = this.Url;
             this._htmlDoc.LoadHtml(this._htmlstring);
+
+            this.EnableFullControl = true;
         }
 
         async Task LoadHtmlFromUrl()
         {
+            this.EnableFullControl = false;
+
             HtmlNode.ElementsFlags.Remove("form");
             this._htmlstring = await MonkeyWeb.Monkey.GetStringAsync(this.Url);
             this._htmlDoc.LoadHtml(this._htmlstring);
+
+            this.EnableFullControl = true;
         }
 
         void GetXPathResult()
@@ -243,7 +275,7 @@ namespace HtmlAgilityPackTestBed
                     this._htmlNode = this._htmlDoc.DocumentNode.SelectSingleNode(this.XPath);
                     if (this._htmlNode != null)
                     {
-                        this.XPathResult = this.ResultText ? this._htmlNode.InnerText : this._htmlNode.InnerHtml;
+                        this.XPathResult = this.ResultText ? (this.ResultTextTrim ? this._htmlNode.InnerText.Trim() : this._htmlNode.InnerText) : this._htmlNode.InnerHtml;
                         this.FooterText = $"Found {this._htmlNode.InnerText.Length} characters.";
                     }
                     else
@@ -263,10 +295,14 @@ namespace HtmlAgilityPackTestBed
                         {
                             var cn = this._htmlNodeCol[i];
 
-                            result += $"{(this.ResultText ? cn.InnerText : cn.InnerHtml)}\r\n------------------------------------------------\r\n";
+                            result += $"{(this.ResultText ? (this.ResultTextTrim ? cn.InnerText.Trim() : cn.InnerText) : cn.InnerHtml)}\r\n------------------------------------------------\r\n";
                         }
 
                         this.XPathResult = result;
+                    }
+                    else
+                    {
+                        this.FooterText = "Your XPath did not return any result.";
                     }
                 }
             }

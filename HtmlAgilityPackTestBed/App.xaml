@@ -13,6 +13,9 @@
             <Style TargetType="RadioButton">
                 <Setter Property="Foreground" Value="White" />
             </Style>
+            <Style TargetType="CheckBox">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
             <Style TargetType="TextBox">
                 <Setter Property="Background" Value="#FF1E1E1E" />
                 <Setter Property="Foreground" Value="#FFF1F1F1" />
