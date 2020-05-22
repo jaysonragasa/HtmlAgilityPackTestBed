@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:jio="clr-namespace:Jara.Xaml.Control.Extension;assembly=Jara.Xaml.ControlExtensions.NetStandard"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        Title="MainWindow" Height="650" Width="500"
+        Title="HtmlAgilityPack Test Bed" Height="650" Width="500"
         
         Background="#FF2D2D30" FontFamily="Segoe UI Light"
         >
